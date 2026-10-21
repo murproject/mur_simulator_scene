@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<node id="337">
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Name" value="GrabSphere" />
+	<attribute name="Tags" />
+	<attribute name="Position" value="0 0 0" />
+	<attribute name="Rotation" value="1 0 0 0" />
+	<attribute name="Scale" value="0.075 0.075 0.075" />
+	<attribute name="Variables" />
+	<component type="StaticModel" id="607">
+		<attribute name="Model" value="Model;Models/Sphere.mdl" />
+		<attribute name="Material" value="Material;Materials/Objects/Colors/Magenta.xml" />
+		<attribute name="Cast Shadows" value="true" />
+	</component>
+	<component type="RigidBody" id="608">
+		<attribute name="Physics Rotation" value="1 2.91941e-18 -1.8917e-31 0" />
+		<attribute name="Mass" value="1" />
+		<attribute name="Friction" value="0.75" />
+		<attribute name="Linear Damping" value="0.75" />
+		<attribute name="Angular Damping" value="0.75" />
+		<attribute name="Collision Layer" value="3" />
+	</component>
+	<component type="CollisionShape" id="609" />
+</node>

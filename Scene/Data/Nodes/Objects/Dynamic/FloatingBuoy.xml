@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<node id="346">
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Name" value="FloatingBuoy" />
+	<attribute name="Tags" />
+	<attribute name="Position" value="-0.39957 -1.78898 1.39987" />
+	<attribute name="Rotation" value="1 0 0 0" />
+	<attribute name="Scale" value="1 1 1" />
+	<attribute name="Variables" />
+	<node id="347">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Base" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 -0.28838 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="0.35 0.05 0.35" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="630">
+			<attribute name="Model" value="Model;Models/Cylinder.mdl" />
+			<attribute name="Material" value="Material;Materials/Objects/Colors/Orange.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+		<component type="RigidBody" id="631">
+			<attribute name="Physics Position" value="-0.39957 -2.07736 1.39987" />
+		</component>
+		<component type="CollisionShape" id="632">
+			<attribute name="Shape Type" value="Cylinder" />
+		</component>
+	</node>
+	<node id="348">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Stick" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 -0.0133805 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="0.05 0.5 0.05" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="633">
+			<attribute name="Model" value="Model;Models/Cylinder.mdl" />
+			<attribute name="Material" value="Material;Materials/Objects/Colors/Orange.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+		<component type="RigidBody" id="634">
+			<attribute name="Physics Position" value="-0.39957 -1.80236 1.39987" />
+			<attribute name="Mass" value="0.5" />
+			<attribute name="Friction" value="0.01" />
+			<attribute name="Linear Damping" value="0.8" />
+			<attribute name="Angular Damping" value="0.8" />
+			<attribute name="Gravity Override" value="0 20 0" />
+		</component>
+		<component type="CollisionShape" id="635" />
+		<component type="Constraint" id="636">
+			<attribute name="Position" value="0 -0.5 0" />
+			<attribute name="Other Body Position" value="0 0.5 0" />
+			<attribute name="Other Body NodeID" value="347" />
+			<attribute name="High Limit" value="0 0.1" />
+			<attribute name="Low Limit" value="0 0.1" />
+			<attribute name="Disable Collision" value="true" />
+		</component>
+	</node>
+	<node id="349">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Buoy" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 0.358266 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="0.25 0.25 0.25" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="637">
+			<attribute name="Model" value="Model;Models/Sphere.mdl" />
+			<attribute name="Material" value="Material;Materials/Objects/Colors/Orange.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+		<component type="RigidBody" id="638">
+			<attribute name="Physics Position" value="-0.39957 -1.43072 1.39987" />
+			<attribute name="Mass" value="0.5" />
+			<attribute name="Friction" value="0.01" />
+		</component>
+		<component type="CollisionShape" id="639" />
+		<component type="Constraint" id="640">
+			<attribute name="Position" value="0 -0.5 0" />
+			<attribute name="Other Body Position" value="0 0.493 0" />
+			<attribute name="Other Body NodeID" value="348" />
+			<attribute name="High Limit" value="0 0.1" />
+			<attribute name="Low Limit" value="0 0.1" />
+		</component>
+	</node>
+</node>

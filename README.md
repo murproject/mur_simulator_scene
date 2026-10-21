@@ -1,0 +1,185 @@
+## Структура сцены
+
+### Data
+Папка с ресурсами сцены. Основные ресурсы необходимые для создания сцен:
+- **Materials** - материалы для моделей
+- **Models** - модели
+- **Nodes** - готовые к использованию ноды
+  - **Objects**
+    - **Dynamic** - физические объекты
+    - **Grabbable** - объекты, которые можно схватить
+    - **Static** - статичные объекты
+  - **Environment** 
+    - **Light** - освещение для бассейна
+    - **Pool** - бассейн квадратный и прямоугольный с разметкой
+    - **Particles** - пузырьки в воде
+    - **Simulator** - ноды, используемые в симуляторе для задания положения аппарата и обзорной камеры
+  - **Tables** - таблички с разными фигурами
+    - **Framed** - с рамкой
+    - **Frameless** - без рамки
+  
+### Config.json
+Файл конфигурации сцены. По умолчанию содержит только **version**, но может быть дополнен:
+1. **version** - версия сцены. Сцены, распространяемые с актуальным MUR IDE - содержат актуальную версию сцен;
+2. **shoot_count** - целое число, ограничение количества выстрелов снарядов (цилиндры);
+3. **drop_count** - целое число, ограничение количества сброса маркеров (сферы);
+4. **grabber_visible** - булево значение, включение отображения манипулятора в донной камере.
+   
+Например, можно ограничить количество выстрелов до 3, сбросы до 5 и включить отображение манипулятора.
+
+```json
+{
+    "version": 1.1,
+    "shoot_count": 3,
+    "drop_count" : 5,
+    "grabber_visible" : true
+}
+```
+### Scene.xml
+Сцена с бассейном. Текущая сцена с квадратным бассейном.
+
+#### Начальное положение аппарата
+Начальное положение аппарата можно задать с помощью ноды. Для этого нужно создать взять готовую ноду **avuStart**. Затем разместить там, где бы вы хотели чтобы аппарат появлялся.
+
+#### Обзорная камера
+Положение обзорной статичной камеры можно задать с помощью готовой ноды **staticCamera**.
+
+#### Маски видимости
+Объекты в симуляторе можно скрыть для разных камер с помощью View Mask у StaticModel.
+Список масок, чтобы сделать объекты "невидимыми" для разных камер:
+- 1 - статичная/обзорная камера, эта маска используется для поверхности воды
+- 2 - нижняя камера аппарата, эта маска используется для скрытия манипулятора в нижней камере
+- 4 - все камеры, маска используется для скрытия объектов по необходимости, например для объектов-триггеров на сцене
+
+### Script.lua
+Скрипт, выполняющий интерактивные действия на сцене. В нем используются дополнительные скрипты из папки `Scripts`. Далее описано, что делают дополнительные скрипты.
+
+#### AuvSettings.lua
+С помощью функции скрипта `SetMotorsFactorAndOffset()` можно задать смещение (*offset*) и коэффциент усиления (*factor*) для каждого движителя. Смещение в диапазоне от -100 до 100, коэффциент усиления от -1.0 до 1.0.
+
+Пример того как можно задать разный коэффицент усиления для каждого движителя и одинаковое смещение:
+
+```lua
+function AuvSettings:SetMotorsFactorAndOffset()
+    local data = VariantMap()
+
+    data["factor_fl"] = Random(-0.05, 0.05)
+    data["factor_fr"] = Random(-0.05, 0.05)
+    data["factor_tl"] = Random(-0.05, 0.05)
+    data["factor_tr"] = Random(-0.05, 0.05)
+    data["factor_b"] = Random(-0.05, 0.05)
+
+    offset = RandomInt(-5, 5)
+
+    data["offset_fl"] = offset
+    data["offset_fr"] = offset
+    data["offset_tl"] = offset
+    data["offset_tr"] = offset
+    data["offset_b"] = offset
+
+    SendEvent("MOTOR_FACTOR_N_OFFSET", data)
+end
+
+```
+
+При каждом перезапуске сцены коэффциенты и смещение будут пересчитываться, так как используют рандомное значение.
+
+#### LampController.lua
+Управление настенными светильниками в бассейне, чтобы они не просвечивали сквозь аппарат при приближении.
+
+#### ParticlesController.lua
+Управление пузырьками воздуха в воде и при погружении аппарата. 
+
+#### SceneSettings.lua
+Скрипт для задания динамических настроек. Можно задать настройки трех видов: слайдеры, чекбоксы, слайдеры с чекбоксами.
+
+Пример настроек:
+
+```lua
+function SceneSettings:SendSceneSettings()
+    local sceneSettings = {
+        {
+            type = "sliderCheckbox",        -- тип настройки checkbox/slider/sliderCheckbox
+            name = "test_sliderCheckbox",   -- название настройки
+            label = "Test slider checkbox", -- название, которое будет отображаться
+            min = 0,                        -- диапазон слайдера минимальный
+            max = 100,                      -- диапазон слайдера максимальный
+            sliderDefaultValue = 50,        -- значение слайдера по умолчанию
+            checkboxDefaultValue = false,   -- значение чекбокса по умолчанию
+            sliderDivider = 10,             -- делитель для слайдера, необязательное поле
+            step = 5                        -- шаг слайдера, необязательное поле
+        },
+
+        {
+            type = "slider",
+            name = "test_sliderCheckbox",
+            label = "Tets slider",
+            min = 0,
+            max = 100,
+            defaultValue = 50,
+            sliderDivider = 10,
+            step = 5
+        },
+
+        {
+            type = "checkbox", 
+            name = "test_checkbox",
+            label = "Test checkbox",
+            defaultValue = true
+        }
+    }
+    
+    local data = self:convertTableToVariantMap(sceneSettings)
+
+    SendEvent("SCENE_SETTINGS", data)
+end
+```
+Отправить настройки необходимо с помощью `SendEvent("SCENE_SETTINGS", data)`.
+
+### Настройки графики
+Настройки графики можно задать в __*.xml__ файлах в папке `RenderPaths`.
+
+Внутри элемента <command> можно добавить элемент <ui>, который автоматически создаст элемент управления в окне настроек графики.
+
+Пример добавления:
+
+```xml
+<command type="quad" tag="Bloom" vs="BloomComplex" psdefines="COPY"  ps="BloomComplex" output="unblurred">
+<ui type="checkbox" label="Bloom" defaultValue="true"/>
+    <texture unit="diffuse" name="viewport" />
+</command>
+```
+
+Пример настроек:
+
+```xml
+<ui 
+    type="sliderCheckbox"       
+    label="Test slider checkbox" 
+    parameter="parameterName" 
+    min="0" 
+    max="100" 
+    sliderDefaultValue="50" 
+    checkboxDefaultValue="true" 
+    sliderDivider="10"
+    step="5"
+/>
+
+<ui 
+    type="slider" 
+    label="Test slider" 
+    parameter="parameterName" 
+    min="0" 
+    max="100" 
+    defaultValue="50" 
+    sliderDivider="10"
+    step="5"
+/>
+
+<ui 
+    type="checkbox" 
+    label="Test checkbox" 
+    defaultValue="true"
+/>
+```
+Значения полей настроек аналогичны настройкам сцены и описаны выше. Поле `parameter` необязательно если параметер один.

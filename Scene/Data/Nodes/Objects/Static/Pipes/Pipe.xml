@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<node id="409">
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Name" value="Pipe" />
+	<attribute name="Tags" />
+	<attribute name="Position" value="0 0 0" />
+	<attribute name="Rotation" value="0.5 0.5 0.5 -0.5" />
+	<attribute name="Scale" value="1 1 1" />
+	<attribute name="Variables" />
+	<component type="StaticModel" id="767">
+		<attribute name="Model" value="Model;Models/Pipes/Pipe.mdl" />
+		<attribute name="Material" value="Material;Materials/Objects/Colors/White.xml" />
+		<attribute name="Cast Shadows" value="true" />
+	</component>
+	<component type="RigidBody" id="768">
+		<attribute name="Physics Rotation" value="0.5 0.5 0.5 -0.5" />
+		<attribute name="Physics Position" value="0 -1.64287 0" />
+	</component>
+	<component type="CollisionShape" id="769">
+		<attribute name="Shape Type" value="Cylinder" />
+		<attribute name="Size" value="0.022 1 0.022" />
+	</component>
+</node>

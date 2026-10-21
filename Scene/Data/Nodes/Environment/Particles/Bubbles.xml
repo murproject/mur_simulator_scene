@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<node id="218">
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Name" value="bubbles" />
+	<attribute name="Tags" />
+	<attribute name="Position" value="0.210581 -2.12136 -1.38363" />
+	<attribute name="Rotation" value="1 0 0 0" />
+	<attribute name="Scale" value="1 1 1" />
+	<attribute name="Variables" />
+	<component type="ParticleEmitter" id="16785101">
+		<attribute name="Effect" value="ParticleEffect;Particles/UnderwaterBubbles.xml" />
+		<attribute name="Animation LOD Bias" value="0" />
+		<attribute name="Particles">
+			<variant type="Int" value="10000" />
+		</attribute>
+		<attribute name="Billboards">
+			<variant type="Int" value="10000" />
+		</attribute>
+		<attribute name="Serialize Particles" value="false" />
+	</component>
+</node>

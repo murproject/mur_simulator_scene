@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<node id="443">
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Name" value="WidePipe" />
+	<attribute name="Tags" />
+	<attribute name="Position" value="0 0.0947933 0" />
+	<attribute name="Rotation" value="1 0 0 0" />
+	<attribute name="Scale" value="1 1 1" />
+	<attribute name="Variables" />
+	<component type="StaticModel" id="854">
+		<attribute name="Model" value="Model;Models/Pipes/WidePipe.mdl" />
+		<attribute name="Material" value="Material;Materials/Objects/Colors/White.xml" />
+		<attribute name="Cast Shadows" value="true" />
+	</component>
+	<component type="RigidBody" id="872">
+		<attribute name="Physics Position" value="0.5 -0.531217 0" />
+	</component>
+	<component type="CollisionShape" id="983">
+		<attribute name="Size" value="0.005 0.2 0.05" />
+		<attribute name="Offset Position" value="-0.05 0 0" />
+	</component>
+	<component type="CollisionShape" id="984">
+		<attribute name="Size" value="0.005 0.2 0.05" />
+		<attribute name="Offset Position" value="0.05 0 0" />
+	</component>
+	<component type="CollisionShape" id="989">
+		<attribute name="Size" value="0.005 0.2 0.05" />
+		<attribute name="Offset Position" value="0 0 -0.05" />
+		<attribute name="Offset Rotation" value="0.707107 0 0.707107 0" />
+	</component>
+	<component type="CollisionShape" id="991">
+		<attribute name="Size" value="0.005 0.2 0.05" />
+		<attribute name="Offset Position" value="0 0 0.05" />
+		<attribute name="Offset Rotation" value="0.707107 0 0.707107 0" />
+	</component>
+	<component type="CollisionShape" id="992">
+		<attribute name="Size" value="0.005 0.2 0.04" />
+		<attribute name="Offset Position" value="-0.035 0 0.035" />
+		<attribute name="Offset Rotation" value="0.92388 0 0.382683 0" />
+	</component>
+	<component type="CollisionShape" id="993">
+		<attribute name="Size" value="0.005 0.2 0.04" />
+		<attribute name="Offset Position" value="0.035 0 0.035" />
+		<attribute name="Offset Rotation" value="0.92388 0 -0.382683 0" />
+	</component>
+	<component type="CollisionShape" id="994">
+		<attribute name="Size" value="0.005 0.2 0.04" />
+		<attribute name="Offset Position" value="0.035 0 -0.035" />
+		<attribute name="Offset Rotation" value="0.92388 0 0.382683 0" />
+	</component>
+	<component type="CollisionShape" id="995">
+		<attribute name="Size" value="0.005 0.2 0.04" />
+		<attribute name="Offset Position" value="-0.035 0 -0.035" />
+		<attribute name="Offset Rotation" value="0.92388 0 -0.382683 0" />
+	</component>
+</node>

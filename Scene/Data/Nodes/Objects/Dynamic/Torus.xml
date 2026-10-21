@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<node id="343">
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Name" value="DynamicTorus" />
+	<attribute name="Tags" />
+	<attribute name="Position" value="-5.96046e-08 0.5 -2.98023e-08" />
+	<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+	<attribute name="Scale" value="1 1 1" />
+	<attribute name="Variables" />
+	<component type="StaticModel" id="622">
+		<attribute name="Model" value="Model;Models/Torus.mdl" />
+		<attribute name="Material" value="Material;Materials/Objects/Colors/Blue.xml" />
+		<attribute name="Cast Shadows" value="true" />
+	</component>
+	<component type="RigidBody" id="623">
+		<attribute name="Physics Rotation" value="0.707107 0.707107 0 0" />
+		<attribute name="Physics Position" value="-5.96046e-08 0.5 -2.98023e-08" />
+		<attribute name="Mass" value="1" />
+	</component>
+	<component type="CollisionShape" id="624">
+		<attribute name="Shape Type" value="TriangleMesh" />
+		<attribute name="Model" value="Model;Models/Torus.mdl" />
+	</component>
+</node>
